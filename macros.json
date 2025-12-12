@@ -1,0 +1,146 @@
+[
+  {
+    "command": "help$0D",
+    "label": "help",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "info$0D",
+    "label": "info",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "sn 0001QAFF00251200000001$0D",
+    "label": "sn",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "securitymode pressed$0d",
+    "label": "but-p",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "securitymode released$0d",
+    "label": "but-R",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "light$0D",
+    "label": "light",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "light on 1$0D",
+    "label": "light o",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "sensor add 1[eee]$0D",
+    "label": "S1",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "sensor add 1[eee2 sensor:2$0D",
+    "label": "S2",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "beep on 10$0d",
+    "label": "beep",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "melody on $0d",
+    "label": "meloc",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "sensor",
+    "label": "senso",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "ssid set DAMOSYS$0d",
+    "label": "w-ssic",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "pass set damo8864$0d",
+    "label": "w-pas",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "dsurl atcloud.com$0d",
+    "label": "s-url",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "dsport 443$0d",
+    "label": "s-port",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "clear$0D",
+    "label": "clear",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "echo$0D",
+    "label": "echo",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "ssid$0D",
+    "label": "",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "ota http://192.168.123.170:8000/firmware_e",
+    "label": "ota",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "save$0D",
+    "label": "save",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "sensor delete 1FEEE1$0D",
+    "label": "DS",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "reboot$0D",
+    "label": "reboot",
+    "timer": 1000,
+    "enabled": false
+  },
+  {
+    "command": "frr$0D",
+    "label": "FR",
+    "timer": 1000,
+    "enabled": false
+  }
+]

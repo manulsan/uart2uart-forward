@@ -32,10 +32,15 @@ yarn format
 npm run format
 ```
 
+### Add electron-builder
+
+yarn add --dev electron-builder
+
 ### Build the app for production
 
 ```bash
-quasar build
+quasar build  -m electron
+quasar dev -m electron
 ```
 
 ### Customize the configuration

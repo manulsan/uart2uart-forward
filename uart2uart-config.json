@@ -1,0 +1,13 @@
+{
+  "dataPrefix": "prefix: ",
+  "dataSuffix": "\r\n",
+  "port1": {
+    "selectedPort": "COM10",
+    "baudRate": 115200
+  },
+  "port2": {
+    "selectedPort": "COM6",
+    "baudRate": 115200
+  },
+  "autoForward": true
+}
