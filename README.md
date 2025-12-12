@@ -18,7 +18,6 @@ A production tool designed for mass manufacturing environments. This application
 - Automated product configuration and testing
 - Serial data forwarding with protocol conversion
 - Manufacturing test equipment integration
- 
 
 ## Install the dependencies
 
@@ -60,6 +59,10 @@ yarn add --dev electron-builder
 quasar build  -m electron
 quasar dev -m electron
 ```
+
+### Screen Shot
+
+![alt text](image.png)
 
 ### Customize the configuration
 
