@@ -67,3 +67,9 @@ quasar dev -m electron
 ### Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
+
+## For STM8xxx Firmware writing
+
+https://github.com/chcbaram/stm8flash_win/releases/tag/1.0.0
+
+https://github.com/chcbaram/stm8flash_win?utm_source=chatgpt.com

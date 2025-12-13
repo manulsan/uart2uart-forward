@@ -62,6 +62,28 @@ contextBridge.exposeInMainWorld('electronAPI', {
     ipcRenderer.removeAllListeners('menu:uart-mode');
     ipcRenderer.on('menu:uart-mode', (_event, mode) => callback(mode));
   },
+  onMenuFirmwareStm: (callback: () => void) => {
+    ipcRenderer.removeAllListeners('menu:firmware-stm');
+    ipcRenderer.on('menu:firmware-stm', () => callback());
+  },
+  onMenuFirmwareEsp32: (callback: () => void) => {
+    ipcRenderer.removeAllListeners('menu:firmware-esp32');
+    ipcRenderer.on('menu:firmware-esp32', () => callback());
+  },
+  selectFirmwareFile: (mcuType: 'stm' | 'esp32') =>
+    ipcRenderer.invoke('firmware:selectFile', mcuType),
+  writeStmFirmware: (
+    filePath: string,
+    mcuPartNo: string,
+    onProgress: (progress: number) => void,
+  ) => {
+    ipcRenderer.on('firmware:progress', (_event, progress) => onProgress(progress));
+    return ipcRenderer.invoke('firmware:writeStm', filePath, mcuPartNo);
+  },
+  writeEsp32Firmware: (filePath: string, port: string, onProgress: (progress: number) => void) => {
+    ipcRenderer.on('firmware:progress', (_event, progress) => onProgress(progress));
+    return ipcRenderer.invoke('firmware:writeEsp32', filePath, port);
+  },
   saveConfig: (config: { dataPrefix: string; dataSuffix: string }) =>
     ipcRenderer.invoke('config:save', config),
   loadConfig: () => ipcRenderer.invoke('config:load'),

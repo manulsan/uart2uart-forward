@@ -38,6 +38,8 @@ interface Window {
     onMenuLoadConfig?: (callback: () => void) => void;
     onMenuSaveConfig?: (callback: () => void) => void;
     onMenuUartMode?: (callback: (mode: string) => void) => void;
+    onMenuFirmwareStm?: (callback: () => void) => void;
+    onMenuFirmwareEsp32?: (callback: () => void) => void;
     saveConfig: (config: {
       dataPrefix: string;
       dataSuffix: string;
@@ -69,6 +71,28 @@ interface Window {
       macros?: unknown;
       filePath?: string;
       cancelled?: boolean;
+      error?: string;
+    }>;
+    selectFirmwareFile: (mcuType: 'stm' | 'esp32') => Promise<{
+      success: boolean;
+      filePath?: string;
+      cancelled?: boolean;
+      error?: string;
+    }>;
+    writeStmFirmware: (
+      filePath: string,
+      mcuPartNo: string,
+      onProgress: (progress: number) => void,
+    ) => Promise<{
+      success: boolean;
+      error?: string;
+    }>;
+    writeEsp32Firmware: (
+      filePath: string,
+      port: string,
+      onProgress: (progress: number) => void,
+    ) => Promise<{
+      success: boolean;
       error?: string;
     }>;
   };

@@ -6,10 +6,33 @@
     </q-card-section> -->
 
     <q-separator />
+    <McuSelection v-model="showMcuDialog" @select="handleMcuSelect" @cancel="handleMcuCancel" />
+    <ComPortSelection
+      v-if="selectedMcu === 'esp32'"
+      v-model="showPortDialog"
+      :mcu-type="selectedMcu"
+      :port-options="portOptions"
+      @select="handlePortSelect"
+      @cancel="handlePortCancel"
+    />
+    <div
+      v-if="(selectedMcu === 'stm' && selectedStmMcu) || (selectedMcu === 'esp32' && selectedPort)"
+      class="q-px-sm q-pt-sm"
+    >
+      <FirmwareWriter
+        :mcu-type="selectedMcu"
+        :port="selectedPort"
+        @close="
+          selectedMcu = '';
+          selectedPort = '';
+        "
+      />
+    </div>
 
     <q-card-section class="q-pa-sm">
       <div class="row q-col-gutter-xs">
         <!-- UART 1 Configuration -->
+
         <div v-if="uartMode === 'dual'" class="col-12 col-md-6">
           <q-card flat bordered>
             <q-card-section>
@@ -383,12 +406,17 @@
           </q-card-section>
         </q-card>
       </div>
+
+      <!-- Firmware Writing Card -->
     </q-card-section>
   </q-card>
 </template>
 
 <script setup lang="ts">
 import { ref, reactive, computed, onMounted, onUnmounted, watch } from 'vue';
+import FirmwareWriter from './FirmwareWriter.vue';
+import ComPortSelection from './ComPortSelection.vue';
+import McuSelection from './McuSelection.vue';
 
 interface PortInfo {
   path: string;
@@ -459,6 +487,11 @@ const manualData = ref('');
 const uartMode = ref<'single' | 'dual'>('dual');
 const uart2RxShowTimeStamp = ref(false);
 const uart2TxShowTimeStamp = ref(false);
+const selectedMcu = ref<'stm' | 'esp32' | ''>('');
+const selectedPort = ref<string>('');
+const selectedStmMcu = ref<string>('');
+const showPortDialog = ref(false);
+const showMcuDialog = ref(false);
 
 const baudRateOptions = [9600, 19200, 38400, 57600, 115200];
 
@@ -882,6 +915,44 @@ const loadConfig = async () => {
   }
 };
 
+const openEsp32PortDialog = async () => {
+  if (portOptions.value.length === 0) {
+    await listPorts();
+  }
+
+  if (portOptions.value.length === 0) {
+    console.error('No UART ports available');
+    return;
+  }
+
+  selectedMcu.value = 'esp32';
+  showPortDialog.value = true;
+};
+
+const handlePortSelect = (port: string) => {
+  selectedPort.value = port;
+  console.log('Selected ESP32 port:', port);
+};
+
+const handlePortCancel = () => {
+  selectedMcu.value = '';
+  console.log('ESP32 port selection cancelled');
+};
+
+const openStmMcuDialog = () => {
+  showMcuDialog.value = true;
+};
+
+const handleMcuSelect = (mcu: string) => {
+  selectedStmMcu.value = mcu;
+  selectedMcu.value = 'stm';
+  console.log('Selected STM MCU:', mcu);
+};
+
+const handleMcuCancel = () => {
+  console.log('STM MCU selection cancelled');
+};
+
 onMounted(() => {
   void listPorts();
 
@@ -912,6 +983,16 @@ onMounted(() => {
     if (port2.isConnected) {
       void disconnect(2);
     }
+  });
+
+  // Listen for firmware writing menu
+  window.electronAPI?.onMenuFirmwareStm?.(() => {
+    openStmMcuDialog();
+  });
+
+  window.electronAPI?.onMenuFirmwareEsp32?.(() => {
+    // Show port selection dialog for ESP32
+    void openEsp32PortDialog();
   });
 
   // Watch for macro enabled state changes

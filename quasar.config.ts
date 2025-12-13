@@ -116,7 +116,7 @@ export default defineConfig((ctx) => {
       // directives: [],
 
       // Quasar plugins
-      plugins: [],
+      plugins: ['Dialog'],
     },
 
     // animations: 'all', // --- includes all animations
@@ -218,6 +218,14 @@ export default defineConfig((ctx) => {
         npmRebuild: false, // Skip rebuilding native modules
 
         forceCodeSigning: false, // Disable code signing
+
+        extraResources: [
+          {
+            from: 'mcu-tools',
+            to: 'mcu-tools',
+            filter: ['**/*'],
+          },
+        ],
 
         win: {
           target: ['nsis'],
