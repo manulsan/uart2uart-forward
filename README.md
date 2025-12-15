@@ -64,6 +64,12 @@ quasar dev -m electron
 
 ![alt text](image.png)
 
+![alt text](image-1.png)
+
+![
+
+](image-2.png)
+
 ### Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-js).
